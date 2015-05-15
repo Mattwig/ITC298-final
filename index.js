@@ -9,10 +9,11 @@ server.start();
 server.views({
     engines: {
         html: require("handlebars")
-    }, 
+    },
     path: "templates",
     layoutPath: "layouts",
-    layout: "default"
+    layout: "default",
+    isCached:false
 });
 
 

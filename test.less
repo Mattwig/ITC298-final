@@ -1,0 +1,33 @@
+.shadow(@distance, @spread: 4px) {
+    box-shadow: @distance @distance @spread rgba(0, 0, 0, .2);
+}
+
+.flex(...) {
+    -webkit-box-flex: @arguments;
+    -webkit-flex: @arguments;
+    flex: @arguments;
+}
+
+@mobile: ~"(max-width: 480px)";
+
+main.content {
+    background: black;
+    color: fade(red, 50%);
+    
+    @media @mobile {
+        background: red;
+    }
+    
+    .flex(1 0 100px);
+    
+    a {
+        color: black;
+        text-decoration: none;
+        .shadow(5px);
+        
+        @media @mobile {
+            float: left;
+        }
+    }
+    
+}

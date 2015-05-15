@@ -5,7 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "grunt": "^0.4.5",
-    "hapi": "^8.4.0"
+    "hapi": "^8.4.0",
+    "handlebars": "^3.0.3",
+    "grunt-nodemon": "^0.4.0",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1"
   },
   "devDependencies": {},
   "scripts": {

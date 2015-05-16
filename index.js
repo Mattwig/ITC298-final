@@ -16,6 +16,16 @@ server.views({
     isCached:false
 });
 
+server.route({
+  method:"GET",
+  path:"/assets/{param*}",
+  handler: {
+    directory: {
+     path: "public"
+    }
+  }
+})
+
 
 
 server.route({

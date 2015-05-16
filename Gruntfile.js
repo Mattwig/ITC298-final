@@ -24,7 +24,29 @@ module.exports = function(grunt){
         },
         html:{
             files: "**/*.html"
+        },
+        less:{
+          files:"**/*.less",
+          tasks:["less"]
         }
+    },
+    less:{
+      development:{
+        options:{
+          paths:["assets/css"]
+        },
+        files:{
+          "assets/css/style.css":"test.less"
+        }
+      },
+      production:{
+        options:{
+          paths:["assets/css"]
+        },
+        files:{
+          "public/css/style.css":"test.less"
+        }
+      }
     }
     });
 

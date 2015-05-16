@@ -10,12 +10,20 @@
 
 @mobile: ~"(max-width: 480px)";
 
+main {
+  background:yellow;
+}
+
+.test {
+  background-color:green;
+}
+
 main.content {
     background: black;
-    color: fade(red, 50%);
+    color: fade(red, 30%);
     
     @media @mobile {
-        background: red;
+        background: blue;
     }
     
     .flex(1 0 100px);

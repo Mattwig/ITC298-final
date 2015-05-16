@@ -1,0 +1,28 @@
+main {
+  background: yellow;
+}
+.test {
+  background-color: green;
+}
+main.content {
+  background: black;
+  color: rgba(255, 0, 0, 0.3);
+  -webkit-box-flex: 1 0 100px;
+  -webkit-flex: 1 0 100px;
+  flex: 1 0 100px;
+}
+@media (max-width: 480px) {
+  main.content {
+    background: blue;
+  }
+}
+main.content a {
+  color: black;
+  text-decoration: none;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 480px) {
+  main.content a {
+    float: left;
+  }
+}

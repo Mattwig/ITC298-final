@@ -4,15 +4,17 @@ module.exports = function(grunt){
     grunt.loadNpmTasks("grunt-concurrent");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-less");
-    
+
     grunt.initConfig({
     concurrent:{
       dev: {
         tasks: ["nodemon", "watch"],
-        logConcurrentOutput:true
+        options: {
+          logConcurrentOutput:true
+        }
       }
     },
-        
+
     nodemon:{
         dev: {
             script: 'index.js'
@@ -24,6 +26,9 @@ module.exports = function(grunt){
         },
         html:{
             files: "**/*.html"
+        },
+        js: {
+            files: "**/*.js"
         },
         less:{
           files:"**/*.less",
@@ -53,4 +58,3 @@ module.exports = function(grunt){
 
     grunt.registerTask("default",["concurrent"]);
 };
-                   

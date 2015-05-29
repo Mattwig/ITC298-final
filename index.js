@@ -1,19 +1,10 @@
 var hapi = require("hapi");
 var server = new hapi.Server();
+var recipe = require("./recipe");
 
 server.connection({port:8000});
 
 server.start();
-
-
-var rec = {
-  recepieList:[
-    {name:"fried chicken"},
-    {name:"mashed potatos"},
-    {name:"beets"},
-    {name:"secret sauce"}
-  ]
-};
 
 server.views({
     engines: {
@@ -36,13 +27,11 @@ server.route({
   }
 });
 
-
-
 server.route({
     method:"GET",
     path:'/',
     handler: function(req, reply){
-        reply.view("recipie", rec);
+        reply.view("listing", recipe);
     }
 });
 

@@ -1,7 +1,7 @@
 {
   "name": "ITC298-final",
   "version": "0.0.1",
-  "description": "Document management application",
+  "description": "recepie application",
   "main": "index.js",
   "dependencies": {
     "grunt": "^0.4.5",

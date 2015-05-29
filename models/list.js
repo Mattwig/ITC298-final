@@ -2,7 +2,8 @@ var backbone = require("backbone");
 
 module.exports = backbone.Model.extend({
   defaults:{
-    ingredient: "",
+    name:"stuff"
+    ingredient: [],
     quantity: 0
-  }  
+  }
 });

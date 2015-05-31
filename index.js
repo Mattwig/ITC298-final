@@ -1,10 +1,25 @@
 var hapi = require("hapi");
 var server = new hapi.Server();
 var recipe = require("./recipe");
+var List = require("./models/list");
+var db = require("./db");
+
+
+
 
 server.connection({port:8000});
 
-server.start();
+db.init(function(err) {
+  if (err) {
+    console.log("broken")
+    return console.error("broken");
+  }
+  console.log("Database ready, starting server...");
+  server.start(function() {
+    console.log("Server ready!");
+  });
+});
+
 
 server.views({
     engines: {
@@ -29,10 +44,34 @@ server.route({
 
 server.route({
     method:"GET",
-    path:'/',
+    path:'/getrecipe',
     handler: function(req, reply){
-        reply.view("listing", recipe);
+      var model = new List();
+      model.load(function(err){
+        var data;
+        if (err){
+          console.log(err);
+        } else
+        {
+          data = model.toJSON();
+        }
+        reply.view("listing",{
+          recipes: data
+        });
+      });
     }
+});
+
+server.route({
+  method:"GET",
+  path:"/",
+  handler:function(req, reply){
+   db.getRecipes(function(err, recipes){
+    reply.view("listing", {
+      recipes: recipes
+    });
+   });
+  }
 });
 
 server.route({

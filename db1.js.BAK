@@ -1,0 +1,33 @@
+var sqlite = require("sqlite3");
+var async = require("async");
+
+module.exports = function(){
+  
+    async.waterfall([
+      function(c){
+        db = new sqlite.Database("recipe.db");
+        callback(err, db);
+      },
+      function(c){
+        db.run("CREATE TABLE IF NOT EXISTS recipe(name);");
+        db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity)");
+      },
+      function(c){
+          db.run("INSERT INTO recipe VALUES ('one');");
+          db.run("INSERT INTO recipe VALUES ('two');");
+          db.run("INSERT INTO recipe VALUES ('three');");
+      }
+    ], function(err, result){
+  }
+)};
+
+    
+    
+  
+    
+    
+
+
+    
+
+

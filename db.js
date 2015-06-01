@@ -16,19 +16,19 @@ var placeholder = {
     placeholder.connection = db;
     console.log(db);
     
-    async.parallel([
+    async.waterfall([
       //create recipes table and insert values via callback after table is created
       function(c){
-        db.run("CREATE TABLE IF NOT EXISTS recipe(name);", c);
-          // function(err){
-          //   db.run("INSERT INTO recipe VALUES ('one');");
-          //   db.run("INSERT INTO recipe VALUES ('two');");
-          //   db.run("INSERT INTO recipe VALUES ('three');");
-          // });
+        db.run("CREATE TABLE IF NOT EXISTS recipe(name);",c);
       },
       //create ingredients table
       function(c){
       db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity)", c);
+      },
+      function(c){
+            db.run("INSERT INTO recipe VALUES ('five');");
+            db.run("INSERT INTO recipe VALUES ('two');");
+            db.run("INSERT INTO recipe VALUES ('three');", c);
       }
     ],
     function(err){

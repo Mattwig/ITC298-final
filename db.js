@@ -12,10 +12,10 @@ var placeholder = {
         process.exit(1);
       }
     });
-    
+
     placeholder.connection = db;
     console.log(db);
-    
+
     async.waterfall([
       //create recipes table and insert values via callback after table is created
       function(c){
@@ -38,6 +38,11 @@ var placeholder = {
   getRecipes: function(c){
     console.log(db);
     db.all("SELECT * FROM recipe",c);
+  },
+  addRecipe: function(payload){
+    db.run("INSERT INTO recipe VALUES ($name)", {
+      $name: payload.name
+    });
   }
 };
 

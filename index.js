@@ -75,9 +75,19 @@ server.route({
 });
 
 server.route({
-  method:"GET",
-  path:"/input",
+  method:"POST",
+  path:"/recipe/{id?}",
   handler:function(req, reply){
-        reply.view("input");
+    var payload = req.payload;
+    console.log(payload)
+    db.addRecipe(payload);
+    }
+});
+
+server.route({
+  method:"GET",
+  path:"/recipe/{id?}",
+  handler:function(req, reply){
+    reply.view("input");
   }
 });

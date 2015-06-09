@@ -23,17 +23,21 @@ var placeholder = {
       },
       //create ingredients table
       function(c){
-      db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity)", c);
+        db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity)", c);
       },
       function(c){
-            db.run("INSERT INTO recipe VALUES ('five');");
-            db.run("INSERT INTO recipe VALUES ('two');");
-            db.run("INSERT INTO recipe VALUES ('three');", c);
+        db.run("CREATE TABLE IF NOT EXISTS recipe_ingredients(recipeName, ingredientName, quantity)", c)
       }
     ],
     function(err){
         if (ready) ready(err);
     });
+  },
+  getRecipe: function(recipe, c){
+    
+    db.get("SELECT name FROM recipe WHERE name = $recipe",{
+      $recipe: recipe
+    }, c);
   },
   getRecipes: function(c){
     console.log(db);

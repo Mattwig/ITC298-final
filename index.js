@@ -1,7 +1,6 @@
 var hapi = require("hapi");
 var server = new hapi.Server();
-var recipe = require("./recipe");
-var List = require("./models/list");
+var Recipe = require("./models/recipe");
 var db = require("./db");
 
 
@@ -44,9 +43,13 @@ server.route({
 
 server.route({
     method:"GET",
-    path:'/getrecipe',
+    path:'/getrecipe/{name?}',
     handler: function(req, reply){
-      var model = new List();
+      var name = req.params.name;
+      var model = new Recipe({
+        name: name
+      });
+      model.set("name", name);
       model.load(function(err){
         var data;
         if (err){
@@ -55,8 +58,8 @@ server.route({
         {
           data = model.toJSON();
         }
-        reply.view("listing",{
-          recipes: data
+        reply.view("recipe",{
+          name: data.name
         });
       });
     }
@@ -88,6 +91,15 @@ server.route({
   method:"GET",
   path:"/recipe/{id?}",
   handler:function(req, reply){
-    reply.view("input");
+    var id = req.params.id;
+    if(id == "new")reply.view("input");
+    else{
+      db.getRecipe(id, function(err, recipe){
+        console.log(recipe.name)
+        reply.view("recipe", {
+          name: recipe.name
+        });
+      });
+    }
   }
 });

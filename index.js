@@ -60,14 +60,14 @@ server.route({
         } else
         {
           recipe = model.toJSON();
-          console.log("recipe name loaded" + recipe.name);
+          console.log("recipe name loaded " + recipe.name);
         }
       });
       model.loadIngredients(function(err){
         if (err){console.log(err)}
         else {
         ingredients = model.toJSON();
-        console.log("ingredients loaded" + ingredients);
+        console.log("ingredients loaded " + ingredients);
         }
       });
      

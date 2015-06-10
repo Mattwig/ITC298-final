@@ -1,6 +1,7 @@
 var hapi = require("hapi");
 var server = new hapi.Server();
 var Recipe = require("./models/recipe");
+var async = require("async");
 var db = require("./db");
 
 
@@ -10,7 +11,7 @@ server.connection({port:8000});
 
 db.init(function(err) {
   if (err) {
-    console.log("broken")
+    console.log(err)
     return console.error("broken");
   }
   console.log("Database ready, starting server...");
@@ -46,21 +47,33 @@ server.route({
     path:'/getrecipe/{name?}',
     handler: function(req, reply){
       var name = req.params.name;
+      var recipe;
+      var ingredients;
       var model = new Recipe({
         name: name
       });
       model.set("name", name);
-      model.load(function(err){
-        var data;
+    
+      model.loadRecipe(function(err){
         if (err){
           console.log(err);
         } else
         {
-          data = model.toJSON();
+          recipe = model.toJSON();
+          console.log("recipe name loaded" + recipe.name);
         }
-        reply.view("recipe",{
-          name: data.name
-        });
+      });
+      model.loadIngredients(function(err){
+        if (err){console.log(err)}
+        else {
+        ingredients = model.toJSON();
+        console.log("ingredients loaded" + ingredients);
+        }
+      });
+     
+      reply.view("recipe",{
+          name: recipe.name,
+          ingredients: ingredients
       });
     }
 });

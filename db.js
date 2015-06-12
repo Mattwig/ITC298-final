@@ -40,11 +40,6 @@ var placeholder = {
         if (ready) ready(err);
     });
   },
-  getRecipe: function(recipe, c){
-    db.get("SELECT name FROM recipe WHERE name = $recipe",{
-      $recipe: recipe
-    }, c);
-  },
   getRecipes: function(c){
     console.log(db);
     db.all("SELECT * FROM recipe",c);

@@ -18,36 +18,10 @@ module.exports = [
 }, {
   method:"GET",
   path:"/",
-  handler:function(req, reply){
-    db.getRecipes(function(err, recipes){
-      console.log(recipes)
-      reply.view("listing", {
-        recipes: recipes
-      });
-    });
-  }
+  handler: require("./handlers/getRecipes")
 }, {
   method:"POST",
-  path:"/recipe/{id?}",
-  handler:function(req, reply){
-    var payload = req.payload;
-    console.log(payload)
-    db.addRecipe(payload);
-    }
-}, {
-  method:"GET",
-  path:"/recipe/{id?}",
-  handler:function(req, reply){
-    var id = req.params.id;
-    if(id == "new")reply.view("input");
-    else{
-      db.getRecipe(id, function(err, recipe){
-        console.log(recipe.name)
-        reply.view("recipe", {
-          name: recipe.name
-        });
-      });
-    }
-  }
+  path:"/getrecipe/{id?}",
+  handler: require("./handlers/setRecipe")
 }
 ];

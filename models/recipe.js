@@ -7,7 +7,8 @@ var LOAD_INGREDIENTS = "SELECT ingredientName FROM recipe_ingredients WHERE reci
 module.exports = backbone.Model.extend({
   defaults:{
     name:"",
-    ingredientName: [],
+    //ingredientName: [],
+    ingredientList:{},
     quantity: 0
   },
   loadRecipe: function(callback){
@@ -19,7 +20,7 @@ module.exports = backbone.Model.extend({
     }, function(err, loaded){
      //console.log(loaded)
       self.set(loaded);
-      callback(err);
+      callback(err, loaded);
     });
   },
   loadIngredients: function(callback){
@@ -32,9 +33,13 @@ module.exports = backbone.Model.extend({
       $name: data.name
     }, function(err, loaded){
       //console.log(loaded);
-      self.set("ingredientName", loaded);
-      //console.log(self.toJSON());
-      callback(err);
+      // var ingredientlist = loaded
+      // var ingredients = loaded.map(function(d) {
+      //   return d.ingredientName;
+      // });
+      //self.set("ingredientName",ingredients);
+      self.set("ingredientList", loaded)
+      callback(err, loaded);
     });
   }
 });

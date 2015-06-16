@@ -4,10 +4,6 @@ var Recipe = require("./models/recipe");
 var async = require("async");
 var db = require("./db");
 
-
-
-
-
 server.connection({port:8000});
 
 db.init(function(err) {

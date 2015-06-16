@@ -15,13 +15,13 @@ module.exports = [
     method:"GET",
     path:'/getrecipe/{name?}',
     handler:  require("./handlers/getRecipe")
-}, {
-  method:"GET",
-  path:"/",
-  handler: require("./handlers/getRecipes")
-}, {
-  method:"POST",
-  path:"/getrecipe/{id?}",
-  handler: require("./handlers/setRecipe")
-}
+  }, {
+    method:"GET",
+    path:"/",
+    handler: require("./handlers/getRecipes")
+  }, {
+    method:"POST",
+    path:"/getrecipe/{id?}",
+    handler: require("./handlers/setRecipe")
+  }
 ];

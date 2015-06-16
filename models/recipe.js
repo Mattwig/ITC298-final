@@ -2,14 +2,28 @@ var backbone = require("backbone");
 var db = require("../db");
 
 var LOAD_NAME = "SELECT name FROM recipe WHERE name = $name";
-var LOAD_INGREDIENTS = "SELECT ingredientName FROM recipe_ingredients WHERE recipeName = $name";
+var LOAD_INGREDIENTS = "SELECT name FROM ingredients WHERE recipeName = $name";
+var ADD_NAME = "INSERT INTO recipe VALUES ($name)";
+var ADD_INGREDIENTS = "INSERT INTO ingredients VALUES($ingredientName, $quantity, $recipeName)";
 
 module.exports = backbone.Model.extend({
   defaults:{
     name:"",
-    //ingredientName: [],
     ingredientList:{},
     quantity: 0
+  },
+  setRecipe: function(payload){
+    var self = this;
+    var nameQuery = db.connection.prepare(ADD_NAME);
+    var ingredientQuery = db.connection.prepare(ADD_INGREDIENTS);
+    ingredientQuery.run({
+      $recipeName: payload.name,
+      $ingredientName: payload.ingredient,
+      $quantity: payload.quantity
+    });
+    nameQuery.run({
+      $name: payload.name
+    });
   },
   loadRecipe: function(callback){
     var self = this;
@@ -18,7 +32,6 @@ module.exports = backbone.Model.extend({
     nameQuery.get({
       $name: data.name
     }, function(err, loaded){
-     //console.log(loaded)
       self.set(loaded);
       callback(err, loaded);
     });
@@ -28,17 +41,10 @@ module.exports = backbone.Model.extend({
     var self = this;
     var ingredientQuery = db.connection.prepare(LOAD_INGREDIENTS);
     var data = this.toJSON();
-    //console.log(data)
     ingredientQuery.all({
       $name: data.name
     }, function(err, loaded){
-      //console.log(loaded);
-      // var ingredientlist = loaded
-      // var ingredients = loaded.map(function(d) {
-      //   return d.ingredientName;
-      // });
-      //self.set("ingredientName",ingredients);
-      self.set("ingredientList", loaded)
+      self.set("ingredientList", loaded);
       callback(err, loaded);
     });
   }

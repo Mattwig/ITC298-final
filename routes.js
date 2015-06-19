@@ -23,5 +23,9 @@ module.exports = [
     method:"POST",
     path:"/getrecipe/{id?}",
     handler: require("./handlers/setRecipe")
+  }, {
+    method:"POST",
+    path:"/register",
+    handler: require("./handlers/register")
   }
 ];

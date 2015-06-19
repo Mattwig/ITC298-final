@@ -3,7 +3,7 @@ var basic = require("hapi-auth-basic");
 var Recipe = require("./models/recipe");
 var async = require("async");
 var db = require("./db");
-var Bcrypt = require("bcrypt")
+var Bcrypt = require("bcrypt");
 
 
 var server = new hapi.Server();

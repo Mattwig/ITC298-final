@@ -26,7 +26,10 @@ var placeholder = {
         db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity)", c);
       },
       function(c){
-        db.run("CREATE TABLE IF NOT EXISTS recipe_ingredients(recipeName, ingredientName, quantity)", c)
+        db.run("CREATE TABLE IF NOT EXISTS users(username, password)", c);
+      },
+      function(c){
+        db.run("CREATE TABLE IF NOT EXISTS recipe_ingredients(recipeName, ingredientName, quantity)", c);
       }
       // function(c){
       //   db.run("INSERT INTO recipe_ingredients VALUES($rName, $iName, $q)", {

@@ -1,8 +1,15 @@
 <div>
   <h1>Your ingredients for a {{name}} are</h1><br>
-  <ul>
+ <div class="ingredient">
+    <p class="title">Name</p>
     {{#ingredients}}
     <li>{{name}}</li>
     {{/ingredients}}
-  </ul>
+  </div>
+  <div class="quantity">
+    <p class="title">Quantity</p>
+    {{#ingredients}}
+    <li>{{quantity}}</li>
+    {{/ingredients}}
+  </div>
 </div>

@@ -25,7 +25,8 @@ module.exports = function(req, reply){
         var data = model.toJSON();
         reply.view("recipe", {
           name: data.name,
-          ingredients: data.ingredientList
+          ingredients: data.ingredientList,
+          quantity: data.quantity
         });
       }
   )}

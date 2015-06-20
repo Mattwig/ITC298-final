@@ -2,7 +2,7 @@ var backbone = require("backbone");
 var db = require("../db");
 
 var LOAD_NAME = "SELECT name FROM recipe WHERE name = $name";
-var LOAD_INGREDIENTS = "SELECT name FROM ingredients WHERE recipeName = $name";
+var LOAD_INGREDIENTS = "SELECT name, quantity FROM ingredients WHERE recipeName = $name";
 var ADD_NAME = "INSERT INTO recipe VALUES ($name)";
 var ADD_INGREDIENTS = "INSERT INTO ingredients VALUES($ingredientName, $quantity, $recipeName)";
 
@@ -10,17 +10,21 @@ module.exports = backbone.Model.extend({
   defaults:{
     name:"",
     ingredientList:{},
-    quantity: 0
+    quantity: {}
   },
   setRecipe: function(payload){
     var self = this;
     var nameQuery = db.connection.prepare(ADD_NAME);
     var ingredientQuery = db.connection.prepare(ADD_INGREDIENTS);
-    ingredientQuery.run({
-      $recipeName: payload.name,
-      $ingredientName: payload.ingredient,
-      $quantity: payload.quantity
-    });
+    console.log(payload)
+    for(var i = 0; i < payload.ingredient.length; i++){
+      console.log(i)
+        ingredientQuery.run({
+          $recipeName: payload.name,
+          $ingredientName: payload.ingredient[i],
+          $quantity: payload.quantity[i]
+      });
+    }
     nameQuery.run({
       $name: payload.name
     });

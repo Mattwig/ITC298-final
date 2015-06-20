@@ -27,17 +27,7 @@ var placeholder = {
       },
       function(c){
         db.run("CREATE TABLE IF NOT EXISTS users(username, password)", c);
-      },
-      function(c){
-        db.run("CREATE TABLE IF NOT EXISTS recipe_ingredients(recipeName, ingredientName, quantity)", c);
       }
-      // function(c){
-      //   db.run("INSERT INTO recipe_ingredients VALUES($rName, $iName, $q)", {
-      //     $rName: "Salad",
-      //     $iName: "lettuce",
-      //     $q: 2
-      //   }, c);
-      //}
     ],
     function(err){
         if (ready) ready(err);

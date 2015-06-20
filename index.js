@@ -3,51 +3,22 @@ var basic = require("hapi-auth-basic");
 var Recipe = require("./models/recipe");
 var async = require("async");
 var db = require("./db");
+var User = require("./models/user");
+
+// module to encrypt passwords
 var Bcrypt = require("bcrypt");
 
 
 var server = new hapi.Server();
 server.connection({port:8000});
 
-var users = {
-    admin: {
-        username: 'admin',
-        password: '$2a$10$iqJSHD.BGr0E2IxQwYgJmeP3NvhPrXAeLSaGCj6IR/XU5QtjVu5Tm',   // 'secret'
-        name: 'admin',
-        id: '2'
-    }
-};
-
-
-var validate = function (username, password, callback) {
-  var user = users[username];
-  if (!user) {
-    console.log("nope");
-    return callback(null, false);
-  }
-  Bcrypt.compare(password, user.password, function(err, isValid){
-    console.log(isValid);
-    callback(err, isValid, {id: user.id, name: user.name});
-  });
-};
-
-
+// register scheme of basic from the hapi-auth-basic module
+// create a strategty that uses the basic scheme and takes a function
+// that is passed from out user model
 server.register(basic, function(err){
-  server.auth.strategy('simple', 'basic', {validateFunc: validate});
-  server.route({
-    method: 'GET',
-    path: '/auth',
-    config: {
-      auth: 'simple',
-      handler: function(req, reply){
-        reply("hello, " +request.auth.credientals.name);
-      }
-    }
-  });
+  var user = new User();
+  server.auth.strategy('simple', 'basic', {validateFunc: user.validate});
 });
-
-
-
 
 db.init(function(err) {
   if (err) {

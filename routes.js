@@ -20,11 +20,19 @@ module.exports = [
     path:"/",
     handler: require("./handlers/getRecipes")
   }, {
+    //user must be registered to post a new recipe
     method:"POST",
     path:"/getrecipe/{id?}",
-    handler: require("./handlers/setRecipe")
+    config: {
+      auth: "simple",
+      handler: require("./handlers/setRecipe")
+    }
   }, {
     method:"POST",
+    path:"/register",
+    handler: require("./handlers/registerUser")
+  }, {
+    method:"GET",
     path:"/register",
     handler: require("./handlers/register")
   }

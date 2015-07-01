@@ -13,12 +13,8 @@ module.exports = function(req, reply){
     });
     model.set("name", name);
     async.parallel([
-      function(callback){
+       function(callback){
         model.loadRecipe(function(err){
-          callback(err);
-        });
-      }, function(callback){
-        model.loadIngredients(function(err){
           callback(err);
         });
       }], function(){

@@ -32,20 +32,14 @@ module.exports = backbone.Model.extend({
   loadRecipe: function(callback){
     var self = this;
     var nameQuery = db.connection.prepare(LOAD_NAME);
+    var ingredientQuery = db.connection.prepare(LOAD_INGREDIENTS);
     var data = this.toJSON();
     nameQuery.get({
       $name: data.name
     }, function(err, loaded){
       self.set(loaded);
-      callback(err, loaded);
     });
-  },
-  loadIngredients: function(callback){
-    //sets the variable equal to the model at the base level
-    var self = this;
-    var ingredientQuery = db.connection.prepare(LOAD_INGREDIENTS);
-    var data = this.toJSON();
-    ingredientQuery.all({
+     ingredientQuery.all({
       $name: data.name
     }, function(err, loaded){
       self.set("ingredientList", loaded);

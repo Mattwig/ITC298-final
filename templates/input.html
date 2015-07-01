@@ -17,5 +17,15 @@
   <input name="ingredient" placeholder="Cheese">
   Quantity
   <input name="quantity" placeholder="1"><br>
+  
+  <div id="more"></div>
   <input type="submit">
+  <div id="add" class="fa fa-plus-square fa-2x"></div><br>
 </form>
+
+ <script>
+    $("#add").click(function(){
+      $("#more").append("Ingredient <input name='ingredient' placeholder='New'> Quantity <input name='quantity' placeholder='1'><br>")
+    });
+  </script>
+

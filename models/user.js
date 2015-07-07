@@ -9,7 +9,8 @@ var SELECT = "SELECT password FROM users WHERE username = $username";
 module.exports = backbone.Model.extend({
   defaults: {
     username: "admin",
-    password:"password"
+    password: "password",
+    favorites:{}
   },
   // take user creds and load into database
   register: function(payload){
@@ -22,6 +23,8 @@ module.exports = backbone.Model.extend({
        $password: hash
      });
    });
+   self.set(payload);
+   console.log(self.toJSON());
   },
   validate: function(username, password, callback){
     var self = this;

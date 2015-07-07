@@ -1,5 +1,4 @@
 var Recipe = require("../models/recipe");
-var User = require("../models/user")
 var async = require("async");
 
 module.exports = function(req, reply){

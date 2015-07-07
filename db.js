@@ -23,10 +23,10 @@ var placeholder = {
       },
       //create ingredients table
       function(c){
-        db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity)", c);
+        db.run("CREATE TABLE IF NOT EXISTS ingredients(name, quantity, recipeName)", c);
       },
       function(c){
-        db.run("CREATE TABLE IF NOT EXISTS users(username, password)", c);
+        db.run("CREATE TABLE IF NOT EXISTS users(username, password, favorites)", c);
       }
     ],
     function(err){

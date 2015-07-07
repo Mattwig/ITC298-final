@@ -1,6 +1,11 @@
 <div>
   <h1>Your ingredients for a {{name}} are</h1><br>
- <div class="ingredient">
+  <div class="center">
+    <form action="/favorite/{{name}}" method="POST">
+      <button>Mark as Favorite</button>
+    </form>
+  </div><br>
+  <div class="ingredient">
     <p class="title">Name</p>
     {{#ingredients}}
     <li>{{name}}</li>

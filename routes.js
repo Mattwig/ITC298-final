@@ -29,11 +29,23 @@ module.exports = [
     }
   }, {
     method:"POST",
+    path:"/signin",
+    handler: require("./handlers/registerUser")
+  }, {
+    method:"GET",
+    path:"/signin",
+    handler: require("./handlers/register")
+  }, {
+    method:"POST",
     path:"/register",
     handler: require("./handlers/registerUser")
   }, {
     method:"GET",
     path:"/register",
     handler: require("./handlers/register")
+  }, {
+    method:"POST",
+    path:"/favorite/{name}",
+    handler: require("./handlers/favorite")
   }
 ];

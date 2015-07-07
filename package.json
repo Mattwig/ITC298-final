@@ -1,7 +1,7 @@
 {
   "name": "ITC298-final",
-  "version": "0.0.1",
-  "description": "recepie application",
+  "version": "0.0.2",
+  "description": "recipe application",
   "main": "index.js",
   "dependencies": {
     "async": "^1.0.0",
